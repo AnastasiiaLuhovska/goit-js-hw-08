@@ -81,24 +81,20 @@ const allGalleryItems = images.map(item => createGalleryItem(item)).join(' ')
 
 gallery.innerHTML = allGalleryItems
 
-const link = document.querySelector('.gallery-link')
-const card = document.querySelector('.gallery-item')
-
 gallery.addEventListener('click', (event) => {
-    if(event.target.nodeName === 'UL'){
-        return
-    }
+    if(event.target.nodeName === 'IMG'){
 
-    event.preventDefault()
-    const item = event.target.closest('li')
-    const img = item.children[0].children[0]
-    console.log(img.dataset.source)
+        event.preventDefault()
+        const item = event.target.closest('li')
+        const img = item.children[0].children[0]
+        console.log(img.dataset.source)
 
-    const instance = basicLightbox.create(` <img
+        const instance = basicLightbox.create(` <img
             class="gallery-image"
             src="${img.dataset.source}"
-            alt="${img.description}"
+            alt="${img.alt}"
         />`)
 
-    instance.show()
+        instance.show()
+    }
 })
